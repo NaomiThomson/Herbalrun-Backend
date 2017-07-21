@@ -50,19 +50,19 @@ var UserSchema = new mongoose.Schema({
       },
       name: {
           type: String,
-          required: true
+          required: false
       },
       ppg: {
           type: Number,
-          required: false,
+          required: false
       },
       ppe: {
           type: Number,
-          required: false,
+          required: false
       },
       ppi: {
           type: Number,
-          required: false,
+          required: false
       },
       units: {
         //i.e. grams, flowers, items
