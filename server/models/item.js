@@ -31,15 +31,18 @@ var Item = mongoose.model('Item',{
   },
   pricePerEigth: {
     type: Number,
-    requied: false
+    requied: false,
+    default: 0
   },
   pricePerGram: {
     type: Number,
-    requied: false
+    requied: false,
+    default: 0
   },
   pricePerItem: {
     type: Number,
-    requied: false
+    requied: false,
+    default: 0
   },
   inventoryGrams: {
     type: Number,
