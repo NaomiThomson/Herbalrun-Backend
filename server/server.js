@@ -370,19 +370,12 @@ app.delete('/users/me/token', authenticate, (req, res) => {
   });
 });
 
-app.patch('/users/cart/:id/:units/:quantity', authenticate, (req, res) => {
-  //used to add a purchase to users cart
-  //i don't know why i did it with params. this is messy.
+app.patch('/users/cart', authenticate, (req, res) => {
 
-  var newItem = {
-    itemId: req.params.id,
-    units: req.params.units,
-    quantity: req.params.quantity
-  }
+  var body = _.pick(req.body, ['id', 'units', 'quantity', 'name', 'ppg', 'ppe', 'ppi']);
 
-  console.log(newItem);
 
-  User.findOneAndUpdate({_id: req.user._id}, {$push: {cart: newItem}}, {new: true})
+  User.findOneAndUpdate({_id: req.user._id}, {$push: {cart: body}}, {new: true})
     .then((user) => {
       if (!user) {
         return res.status(404).send();
