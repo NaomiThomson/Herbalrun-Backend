@@ -52,6 +52,18 @@ var UserSchema = new mongoose.Schema({
           type: String,
           required: true
       },
+      ppg: {
+          type: Number,
+          required: false,
+      },
+      ppe: {
+          type: Number,
+          required: false,
+      },
+      ppi: {
+          type: Number,
+          required: false,
+      },
       units: {
         //i.e. grams, flowers, items
         type: String,

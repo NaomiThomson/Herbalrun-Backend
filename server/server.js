@@ -38,11 +38,7 @@ app.use(bodyParser.json());
 app.post('/users', (req, res) => {
   //creates a user
   var body = _.pick(req.body, ['email', 'password', 'address', 'firstName', 'lastName', 'phoneNumber', 'DLNumber']);
-  console.log(body);
-  console.log('_________-');
   body.termsAccepted = true;
-  console.log(body);
-  console.log('___________-');
   var user = new User(body);
   user.cart = [];
   user.deliveries = [];
