@@ -48,6 +48,10 @@ var UserSchema = new mongoose.Schema({
         type: String,
         requied: true
       },
+      name: {
+          type: String,
+          required: true
+      },
       units: {
         //i.e. grams, flowers, items
         type: String,
