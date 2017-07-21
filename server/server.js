@@ -334,6 +334,10 @@ app.get('/users/:id', authenticate, (req, res) => {
 app.get('/users/cart/:id', (req, res) => {
   //returns a the cart by user id
 
+  // return res.status(404).send('testing');
+  // console.warn('getting cart');
+  console.log('hello')
+
   User.findOne({_id: req.params.id}).then((user) => {
     if (!user) {
       return res.status(404).send();
@@ -370,12 +374,9 @@ app.delete('/users/me/token', authenticate, (req, res) => {
   });
 });
 
-app.patch('/users/cart', authenticate, (req, res) => {
+app.patch('/users/cart/:id', authenticate, (req, res) => {
   
-  console.log('patching...');
-
-  var body = _.pick(req.body, ['id', 'units', 'quantity', 'name', 'ppg', 'ppe', 'ppi']);
-
+  var body = _.pick(req.body, ['itemId','units', 'quantity', 'name', 'ppg', 'ppe', 'ppi']);
   console.log(body);
 
 
