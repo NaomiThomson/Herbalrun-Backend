@@ -430,7 +430,11 @@ app.post('/transactions', authenticate, (req, res) => {
         var cartItem = {
           itemId: cart[i].itemId,
           unitType: cart[i].units,
-          quantity: cart[i].quantity
+          quantity: cart[i].quantity,
+          name: cart[i].name,
+          ppg: cart[i].ppg,
+          ppe: cart[i].ppe,
+          ppi: cart[i].ppi
         }
         Transaction.findOneAndUpdate({_id: transactionId}, {$push: {order: cartItem}}, {new: true}).then((transaction) => {
           tranId_user = transaction._id;

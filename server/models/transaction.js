@@ -18,8 +18,19 @@ var Transaction = mongoose.model('Transaction',{
     quantity: {
       type: Number,
       required: true
+    },
+    name: {
+      type: String
+    },
+    ppg: {
+      type: Number
+    },
+    ppe: {
+      type: Number
+    },
+    ppi: {
+      type: Number
     }
-    //we can add a price per order item here
   }],
   total: {
     type: Number,
