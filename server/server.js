@@ -374,11 +374,8 @@ app.delete('/users/me/token', authenticate, (req, res) => {
   });
 });
 
-app.patch('/users/cart/:id', authenticate, (req, res) => {
-  
+app.patch('/cart', authenticate, (req, res) => {
   var body = _.pick(req.body, ['itemId','units', 'quantity', 'name', 'ppg', 'ppe', 'ppi']);
-  console.log(body);
-
 
   User.findOneAndUpdate({_id: req.user._id}, {$push: {cart: body}}, {new: true})
     .then((user) => {
@@ -390,7 +387,7 @@ app.patch('/users/cart/:id', authenticate, (req, res) => {
       console.log(e);
       res.status(400).send();
     });
-});
+});;
 
 app.delete('/users/cart/:id', authenticate, (req, res) => {
   // removes item from cart
