@@ -295,9 +295,9 @@ app.patch('/item/:id', authenticate, (req, res) => {
 
 app.get('/users/me', authenticate, (req, res) => {
   //returns the user
-  consoloe.log('-------');
+  console.log('-------');
   console.log(req.user);
-  consoloe.log('-------');
+  console.log('-------');
   res.send(req.user);
 });
 
