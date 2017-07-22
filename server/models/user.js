@@ -65,7 +65,7 @@ var UserSchema = new mongoose.Schema({
           required: false
       },
       units: {
-        //i.e. grams, flowers, items
+        //i.e. grams, items
         type: String,
         required: true
       },
