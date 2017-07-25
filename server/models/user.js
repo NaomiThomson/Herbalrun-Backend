@@ -45,23 +45,11 @@ var UserSchema = new mongoose.Schema({
     },
     cart: [{
       itemId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         requied: true
       },
       name: {
           type: String,
-          required: false
-      },
-      ppg: {
-          type: Number,
-          required: false
-      },
-      ppe: {
-          type: Number,
-          required: false
-      },
-      ppi: {
-          type: Number,
           required: false
       },
       units: {
@@ -76,13 +64,13 @@ var UserSchema = new mongoose.Schema({
     }],
     deliveries: [{
       tranId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: true
       }
     }],
     admin: {
       type: Boolean,
-      required: true
+      default: false
     },
     verified: {
       type: Boolean,

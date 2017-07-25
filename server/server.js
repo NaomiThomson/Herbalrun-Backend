@@ -42,7 +42,6 @@ app.post('/users', (req, res) => {
   var user = new User(body);
   user.cart = [];
   user.deliveries = [];
-  user.admin = false;
 
   user.save().then(() => {
     return user.generateAuthToken();
@@ -188,16 +187,18 @@ app.post('/item', authenticate, (req, res) => {
 
   var item = new Item({
     name: req.body.name,
-    consumptionForm: req.body.consumptionForm,
-    flowerType: req.body.flowerType,
+    category: req.body.category,
     thc: req.body.thc,
     cbd: req.body.cbd,
     cbn: req.body.cbn,
-    pricePerEigth: req.body.pricePerEigth,
-    pricePerGram: req.body.pricePerGram,
-    pricePerItem: req.body.pricePerItem,
-    inventoryGrams: req.body.inventoryGrams,
-    inventoryItems: req.body.inventoryItems,
+    ppe: req.body.ppe,
+    ppq: req.body.ppq,
+    pph: req.body.pph,
+    ppo: req.body.ppo,
+    pphg_extract: req.body.pphg_extract,
+    ppg_extract: req.body.ppg_extract,
+    ppi: req.body.ppi,
+    stock: req.body.stock,
     licenseNumber: req.body.licenseNumber,
     flowerOriginal: req.body.flowerOriginal,
     harvestData: req.body.harvestData,
@@ -273,7 +274,7 @@ app.patch('/item/:id', authenticate, (req, res) => {
   }
 
   var id = req.params.id;
-  var body = _.pick(req.body, ['name', 'consumptionForm', 'flowerType', 'thc', 'cbd', 'cbn', 'pricePerEigth', 'pricePerGram', 'pricePerItem', 'inventoryGrams', 'inventoryItems', 'licenseNumber', 'flowerOriginal', 'harvestData', 'harvestLot', 'testedBy', 'testId', 'dateTested', 'icann', 'mmps', 'imageFileName']);
+  var body = _.pick(req.body, ['name', 'category', 'thc', 'cbd', 'cbn', 'ppe', 'ppq', 'pph', 'ppo', 'pphg_extract', 'ppg_extract', 'ppi', 'stock', 'licenseNumber', 'flowerOriginal', 'harvestData', 'harvestLot', 'testedBy', 'testId', 'dateTested', 'icann', 'mmps', 'imageFileName']);
 
   if(req.user.admin == false){
     return res.status(401).send();
@@ -295,9 +296,6 @@ app.patch('/item/:id', authenticate, (req, res) => {
 
 app.get('/users/me', authenticate, (req, res) => {
   //returns the user
-  console.log('-------');
-  console.log(req.user);
-  console.log('-------');
   res.send(req.user);
 });
 
@@ -319,7 +317,6 @@ app.get('/users', authenticate, (req, res) => {
 });
 
 app.get('/users/:id', authenticate, (req, res) => {
-  //returns user by id
 
   if (req.user.admin == false) {
     return res.send(401);
@@ -378,7 +375,7 @@ app.delete('/users/me/token', authenticate, (req, res) => {
 });
 
 app.patch('/cart', authenticate, (req, res) => {
-  var body = _.pick(req.body, ['itemId','units', 'quantity', 'name', 'ppg', 'ppe', 'ppi']);
+  var body = _.pick(req.body, ['itemId','units', 'quantity', 'name']);
 
   User.findOneAndUpdate({_id: req.user._id}, {$push: {cart: body}}, {new: true})
     .then((user) => {
@@ -434,10 +431,7 @@ app.post('/transactions', authenticate, (req, res) => {
           itemId: cart[i].itemId,
           unitType: cart[i].units,
           quantity: cart[i].quantity,
-          name: cart[i].name,
-          ppg: cart[i].ppg,
-          ppe: cart[i].ppe,
-          ppi: cart[i].ppi
+          name: cart[i].name
         }
         Transaction.findOneAndUpdate({_id: transactionId}, {$push: {order: cartItem}}, {new: true}).then((transaction) => {
           tranId_user = transaction._id;

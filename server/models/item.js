@@ -7,15 +7,10 @@ var Item = mongoose.model('Item',{
     minlength: 1,
     trim: true
   },
-  consumptionForm: {
-    //i.e. flower, concentrate, edible
+  category: {
+    //indica, sativa, hybrid, extract, tank, edibles, misc
     type: String,
     required: true
-  },
-  flowerType: {
-    //i.e. indica, sativa, hybrid
-    type: String,
-    required: false
   },
   thc: {
     type: Number,
@@ -29,28 +24,37 @@ var Item = mongoose.model('Item',{
     type: Number,
     required: false
   },
-  pricePerEigth: {
+  ppe: {
     type: Number,
-    requied: false,
     default: 0
   },
-  pricePerGram: {
+  ppq: {
     type: Number,
-    requied: false,
     default: 0
   },
-  pricePerItem: {
+  pph: {
     type: Number,
-    requied: false,
     default: 0
   },
-  inventoryGrams: {
+  ppo: {
     type: Number,
-    required: false
+    default: 0
   },
-  inventoryItems: {
+  pphg_extract: {
     type: Number,
-    required: false
+    default: 0
+  },
+  ppg_extract: {
+    type: Number,
+    default: 0
+  },
+  ppi: {
+    type: Number,
+    default: 0
+  },
+  stock: {
+    type: Number,
+    default: 0
   },
   licenseNumber: {
     type: String,

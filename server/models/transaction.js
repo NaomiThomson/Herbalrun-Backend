@@ -3,33 +3,21 @@ var mongoose = require('mongoose');
 var Transaction = mongoose.model('Transaction',{
   // lets add a userInfo object that has id, name, email. or just id and email for now
   userId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true
   },
   order: [{
     itemId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true
     },
-    unitType: {
+    unit: {
       type: String,
       required: true
     },
     quantity: {
       type: Number,
       required: true
-    },
-    name: {
-      type: String
-    },
-    ppg: {
-      type: Number
-    },
-    ppe: {
-      type: Number
-    },
-    ppi: {
-      type: Number
     }
   }],
   total: {
