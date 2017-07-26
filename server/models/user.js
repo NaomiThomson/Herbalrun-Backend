@@ -44,23 +44,51 @@ var UserSchema = new mongoose.Schema({
         required: false
     },
     cart: [{
-      itemId: {
+        itemId: {
         type: mongoose.Schema.Types.ObjectId,
         requied: true
-      },
-      name: {
-          type: String,
-          required: false
-      },
-      units: {
-        //i.e. grams, items
-        type: String,
-        required: true
-      },
-      quantity: {
-        type: Number,
-        required: true
-      }
+        },
+        name: {
+            type: String,
+            required: true
+        },
+        units: {
+            //i.e. grams, items
+            type: String,
+            required: true
+        },
+        quantity: {
+            type: Number,
+            required: true
+        },
+        ppe: {
+            type: Number,
+            required: true
+        },
+        ppq: {
+          type: Number,
+          required: true
+        },
+        pph: {
+          type: Number,
+          required: true
+        },
+        ppo: {
+          type: Number,
+          required: true
+        },
+        pphg_extract: {
+          type: Number,
+          required: true
+        },
+        ppg_extract: {
+          type: Number,
+          required: true
+        },
+        ppi: {
+          type: Number,
+          required: true
+        }
     }],
     deliveries: [{
       tranId: {

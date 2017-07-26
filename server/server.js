@@ -375,7 +375,7 @@ app.delete('/users/me/token', authenticate, (req, res) => {
 });
 
 app.patch('/cart', authenticate, (req, res) => {
-  var body = _.pick(req.body, ['itemId','units', 'quantity', 'name']);
+  var body = _.pick(req.body, ['itemId','units', 'quantity', 'name', 'ppe', 'ppq', 'pph', 'ppo', 'pphg_extract', 'ppg_extract', 'ppi']);
 
   User.findOneAndUpdate({_id: req.user._id}, {$push: {cart: body}}, {new: true})
     .then((user) => {
