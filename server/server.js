@@ -407,7 +407,7 @@ app.post('/transactions', authenticate, (req, res) => {
   //checkout. dumps the cart and moves into transaction table
 
   if (req.user.verified == false) {
-    return res.status(401).send();
+    return res.status(401).send("unverified");
   }
   var transaction = new Transaction({
     userId: req.user._id,
