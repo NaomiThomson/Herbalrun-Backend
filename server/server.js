@@ -429,7 +429,7 @@ app.post('/transactions', authenticate, (req, res) => {
       for (i=0; i<cart.length; i++) {
         var cartItem = {
           itemId: cart[i].itemId,
-          unitType: cart[i].units,
+          unit: cart[i].units,
           quantity: cart[i].quantity,
           name: cart[i].name
         }
