@@ -50,50 +50,39 @@ var UserSchema = new mongoose.Schema({
         },
         name: {
             type: String,
-            required: true
         },
         units: {
             //i.e. grams, items
-            type: String,
-            required: true
+            type: String
         },
         quantity: {
-            type: Number,
-            required: true
+            type: Number
         },
         ppe: {
-            type: Number,
-            required: true
+            type: Number
         },
         ppq: {
-          type: Number,
-          required: true
+          type: Number
         },
         pph: {
-          type: Number,
-          required: true
+          type: Number
         },
         ppo: {
-          type: Number,
-          required: true
+          type: Number
         },
         pphg_extract: {
-          type: Number,
-          required: true
+          type: Number
         },
         ppg_extract: {
-          type: Number,
-          required: true
+          type: Number
         },
         ppi: {
-          type: Number,
-          required: true
+          type: Number
         }
     }],
     deliveries: [{
       tranId: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true
       }
     }],
     admin: {
