@@ -99,7 +99,7 @@ app.get('/image', (req, res) => {
     // image.src = `data:image/png;base64,${images[0].file}`;
     var decodedImage = new Buffer(images[0].file, 'base64');
     fs.writeFile('image_decoded.jpg', decodedImage, function(err) {
-      res.sendFile('image_decoded.jpg');
+      res.sendFile(__dirname + '/image_decoded.jpg');
     });
   }).catch((e) => {
     console.log(e);
