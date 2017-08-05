@@ -70,18 +70,6 @@ app.post('/upload', (req, res) => {
     if (e) throw err;
     console.log("upload complete")
   })
-
-//   if (path.extname(req.files.file.name).toLowerCase() === '.jpg') {
-//     fs.rename(tempPath, targetPath, function(err) {
-//       if (err) throw err;
-//       console.log("Upload completed!");
-//     });
-// } else {
-//   fs.unlink(tempPath, function () {
-//     if (err) throw err;
-//     console.error("Only .png files are allowed!");
-//   });
-}
 });
 
 
