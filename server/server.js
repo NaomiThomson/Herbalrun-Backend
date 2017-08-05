@@ -5,6 +5,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 var fs = require('fs');
 var jpeg = require('jpeg-js');
+const fileUpload = require('express-fileupload');
+
 
 var {mongoose} = require('./db/mongoose');
 var {Item} = require('./models/item');
@@ -37,6 +39,8 @@ app.use(function(req,res,next){
 });
 
 app.use(bodyParser.json());
+app.use(fileUpload());
+
 //-----------testing file upload-----------------
 // var testImage = fs.readFileSync(__dirname + '/default.jpg');
 // var imageData = jpeg.decode(testImage);
@@ -67,6 +71,29 @@ app.post('/upload', (req, res) => {
   console.log('---------1------------');
   console.log(req.files);
   console.log('----------2-----------');
+
+  if (!req.files){
+    return res.status(400).send('No files were uploaded.');
+  } else {
+    let sampleFile = req.files.myfile;
+    console.log(sampleFile);
+    // sampleFile.mv('/somewhere/on/your/server/filename.jpg', function(err) {
+    // if (err)
+    //   return res.status(500).send(err);
+ 
+    // res.send('File uploaded!');
+  // });
+  }
+
+
+
+
+
+
+
+
+
+
   // let tempPath = req.files.myfile;
   console.log(req.files.myfile)
   // let targetPath = path.resolve('./uploads/testImage.png');
