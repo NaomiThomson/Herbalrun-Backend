@@ -95,8 +95,12 @@ app.post('/upload', (req, res) => {
 app.get('/image', (req, res) => {
   Image.find().then((images) => {
     console.log(images[0].file);
-    var image = new Image();
-    image.src = `data:image/png;base64,${images[0].file}`;
+    // var image = new Image();
+    // image.src = `data:image/png;base64,${images[0].file}`;
+    var decodedImage = new Buffer(images[0].file, 'base64');
+    fs.writeFile('image_decoded.jpg', decodedImage, function(err) {
+      res.sendFile('image_decoded.jpg');
+    });
   }).catch((e) => {
     console.log(e);
   })
