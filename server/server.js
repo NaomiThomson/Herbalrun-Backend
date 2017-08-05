@@ -75,7 +75,7 @@ app.post('/upload', (req, res) => {
   if (!req.files){
     return res.status(400).send('No files were uploaded.');
   } else {
-    let sampleFile = req.files.myfile;
+    let sampleFile = req.files.sampleFile;
     console.log(sampleFile);
     console.log(__dirname);
     sampleFile.mv(__dirname + '/images/inventory/apicture.jpg', function(err) {
