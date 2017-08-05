@@ -64,6 +64,9 @@ app.use(bodyParser.json());
 // });
 
 app.post('/upload', (req, res) => {
+  console.log('---------------------');
+  console.log(req);
+  console.log('---------------------');
   let tempPath = req.files.file.path;
   let targetPath = path.resolve('./uploads/testImage.png');
   fs.rename(tempPath, targetPath, (e) => {
