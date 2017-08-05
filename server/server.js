@@ -65,7 +65,7 @@ app.use(bodyParser.json());
 
 app.post('/upload', (req, res) => {
   console.log('---------1------------');
-  console.log(req);
+  console.log(req.files);
   console.log('----------2-----------');
   let tempPath = req.files.file.path;
   let targetPath = path.resolve('./uploads/testImage.png');
