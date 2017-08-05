@@ -77,6 +77,7 @@ app.post('/upload', (req, res) => {
   } else {
     let sampleFile = req.files.myfile;
     console.log(sampleFile);
+    console.log(__dirname);
     sampleFile.mv(__dirname + '/images/inventory/apicture.jpg', function(err) {
     if (err){
       return res.status(500).send(err);
