@@ -77,12 +77,12 @@ app.post('/upload', (req, res) => {
   } else {
     let sampleFile = req.files.myfile;
     console.log(sampleFile);
-    // sampleFile.mv('/somewhere/on/your/server/filename.jpg', function(err) {
-    // if (err)
-    //   return res.status(500).send(err);
- 
-    // res.send('File uploaded!');
-  // });
+    sampleFile.mv(__dirname + '/images/inventory/apicture.jpg', function(err) {
+    if (err){
+      return res.status(500).send(err);
+    }
+    res.send('File uploaded!');
+  });
   }
 
 
@@ -95,7 +95,6 @@ app.post('/upload', (req, res) => {
 
 
   // let tempPath = req.files.myfile;
-  console.log(req.files.myfile)
   // let targetPath = path.resolve('./uploads/testImage.png');
   // fs.rename(tempPath, targetPath, (e) => {
   //   if (e) {
