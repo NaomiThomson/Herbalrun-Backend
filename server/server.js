@@ -90,23 +90,21 @@ app.post('/upload', (req, res) => {
       res.status(500).send(e);
     })
   }
+});
 
-
-  // let tempPath = req.files.myfile;
-  // let targetPath = path.resolve('./uploads/testImage.png');
-  // fs.rename(tempPath, targetPath, (e) => {
-  //   if (e) {
-  //     console.log(e);
-  //   }
-  //   console.log("upload complete")
-  // })
+app.get('/image', (req, res) => {
+  Image.find().then((image) => {
+    console.log(image);
+    var image = new Image();
+    image.src = `data:image/png;base64,${image.file}`;
+  }).catch((e) => {
+    console.log(e);
+  })
 });
 
 
-app.get('/image', (req, res) => {
-
+app.get('/image2', (req, res) => {
   res.sendFile(__dirname + '/images/inventory/default.jpg');
-
 });
 
 //----------------------------
