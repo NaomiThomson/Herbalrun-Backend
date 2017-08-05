@@ -93,10 +93,10 @@ app.post('/upload', (req, res) => {
 });
 
 app.get('/image', (req, res) => {
-  Image.find().then((image) => {
-    console.log(image);
+  Image.find().then((images) => {
+    console.log(images[0].file);
     var image = new Image();
-    image.src = `data:image/png;base64,${image.file}`;
+    image.src = `data:image/png;base64,${images[0].file.Binary.buffer}`;
   }).catch((e) => {
     console.log(e);
   })
