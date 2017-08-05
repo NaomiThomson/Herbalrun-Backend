@@ -64,13 +64,15 @@ app.use(bodyParser.json());
 // });
 
 app.post('/upload', (req, res) => {
-  console.log('---------------------');
+  console.log('---------1------------');
   console.log(req);
-  console.log('---------------------');
+  console.log('----------2-----------');
   let tempPath = req.files.file.path;
   let targetPath = path.resolve('./uploads/testImage.png');
   fs.rename(tempPath, targetPath, (e) => {
-    if (e) throw err;
+    if (e) {
+      console.log(e);
+    }
     console.log("upload complete")
   })
 });
