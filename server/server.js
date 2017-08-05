@@ -98,8 +98,12 @@ app.get('/image', (req, res) => {
     // var image = new Image();
     // image.src = `data:image/png;base64,${images[0].file}`;
     var decodedImage = new Buffer(images[0].file, 'base64');
-    fs.writeFile('image_decoded.jpg', decodedImage, function(err) {
-      res.sendFile(__dirname + '/image_decoded.jpg');
+    fs.writeFile(__dirname + '/image_decoded.jpg', decodedImage, function(err) {
+      if (err) {
+        return res.status(500).send(err);
+      } else {
+        res.sendFile(__dirname + '/image_decoded.jpg');
+      }
     });
   }).catch((e) => {
     console.log(e);
