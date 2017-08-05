@@ -3,11 +3,14 @@ require('./config/config.js');
 const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
+var fs = require('fs');
+var jpeg = require('jpeg-js');
 
 var {mongoose} = require('./db/mongoose');
 var {Item} = require('./models/item');
 var {User} = require('./models/user');
 var {Transaction} = require('./models/transaction');
+var {Image} = require('./models/image');
 var {authenticate} = require('./middleware/authenticate');
 
 const {ObjectID} = require('mongodb');
@@ -34,6 +37,61 @@ app.use(function(req,res,next){
 });
 
 app.use(bodyParser.json());
+//-----------testing file upload-----------------
+// var testImage = fs.readFileSync(__dirname + '/default.jpg');
+// var imageData = jpeg.decode(testImage);
+// console.log(imageData);
+
+// app.post('/upload', (req, res) => {
+
+//   console.log('hi');
+
+
+//   let body = {
+//     file: testImage
+//   }
+
+//   var image = new Image(body);
+
+//   image.save().then(() => {
+//     res.contentType('image/jpg');
+//     res.sendFile(__dirname + '/default.jpg');
+//     // res.send(jpeg.decode(body.file.data));
+//   }).catch((e) => {
+//     console.log(e);
+//     res.status(400).send(e);
+//   })
+// });
+
+app.post('/upload', (req, res) => {
+  let tempPath = req.files.file.path;
+  let targetPath = path.resolve('./uploads/testImage.png');
+  fs.rename(tempPath, targetPath, (e) => {
+    if (e) throw err;
+    console.log("upload complete")
+  })
+
+//   if (path.extname(req.files.file.name).toLowerCase() === '.jpg') {
+//     fs.rename(tempPath, targetPath, function(err) {
+//       if (err) throw err;
+//       console.log("Upload completed!");
+//     });
+// } else {
+//   fs.unlink(tempPath, function () {
+//     if (err) throw err;
+//     console.error("Only .png files are allowed!");
+//   });
+}
+});
+
+
+app.get('/image', (req, res) => {
+
+  res.sendFile(__dirname + '/images/inventory/default.jpg');
+
+});
+
+//----------------------------
 
 app.post('/users', (req, res) => {
   //creates a user
