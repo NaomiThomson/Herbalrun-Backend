@@ -77,22 +77,19 @@ app.post('/upload', (req, res) => {
   } else {
     let sampleFile = req.files.sampleFile;
     console.log(sampleFile);
-    console.log(__dirname);
-    sampleFile.mv(__dirname + '/images/inventory/apicture.jpg', function(err) {
-    if (err){
-      return res.status(500).send(err);
-    }
-    res.send('File uploaded!');
-  });
+    
+    let image = new Image({
+      name: "sampleFile",
+      file: req.files.sampleFile.data
+    });
+
+    image.save().then(() => {
+      res.send('Uploaded')
+    }).catch((e) => {
+      console.log(e);
+      res.status(500).send(e);
+    })
   }
-
-
-
-
-
-
-
-
 
 
   // let tempPath = req.files.myfile;
