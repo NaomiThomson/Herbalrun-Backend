@@ -67,14 +67,15 @@ app.post('/upload', (req, res) => {
   console.log('---------1------------');
   console.log(req.files);
   console.log('----------2-----------');
-  let tempPath = req.files.file.path;
-  let targetPath = path.resolve('./uploads/testImage.png');
-  fs.rename(tempPath, targetPath, (e) => {
-    if (e) {
-      console.log(e);
-    }
-    console.log("upload complete")
-  })
+  // let tempPath = req.files.myfile;
+  console.log(req.files.myfile)
+  // let targetPath = path.resolve('./uploads/testImage.png');
+  // fs.rename(tempPath, targetPath, (e) => {
+  //   if (e) {
+  //     console.log(e);
+  //   }
+  //   console.log("upload complete")
+  // })
 });
 
 
