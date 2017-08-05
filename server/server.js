@@ -96,7 +96,7 @@ app.get('/image', (req, res) => {
   Image.find().then((images) => {
     console.log(images[0].file);
     var image = new Image();
-    image.src = `data:image/png;base64,${images[0].file.Binary.buffer}`;
+    image.src = `data:image/png;base64,${images[0].file}`;
   }).catch((e) => {
     console.log(e);
   })
