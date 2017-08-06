@@ -116,10 +116,7 @@ app.post('/users/upload/id/:userId', (req, res) => {
   if (!req.files){
     return res.status(400).send('No files were uploaded.');
   } else {
-    console.log('---------')
-    console.log(req.files.file);
     let idFile = req.files.file.data;
-    console.log(idFile);
 
     User.findOneAndUpdate({_id: req.params.userId}, {$set: {idFile}}, {new: true})
       .then((user) => {
@@ -134,10 +131,7 @@ app.post('/users/upload/rec/:userId', (req, res) => {
   if (!req.files){
     return res.status(400).send('No files were uploaded.');
   } else {
-    console.log('---------')
-    console.log(req.files.file);
     let recFile = req.files.file.data;
-    console.log(idFile);
 
     User.findOneAndUpdate({_id: req.params.userId}, {$set: {recFile}}, {new: true})
       .then((user) => {
@@ -165,7 +159,7 @@ app.get('/users/files/id', authenticate, (req, res) => {
 
 app.get('/users/files/rec', authenticate, (req, res) => {
   User.findOne({_id: req.user._id}).then((user) => {
-    var decodedImage = new Buffer(user.idFile, 'base64');
+    var decodedImage = new Buffer(user.recFile, 'base64');
     fs.writeFile(__dirname + `userRec_user=${req.user._id}.jpg`, decodedImage, function (err) {
       if (err) {
         return res.status(500).send(err);
