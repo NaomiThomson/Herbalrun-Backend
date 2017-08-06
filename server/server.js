@@ -114,6 +114,7 @@ app.post('/users/upload/id/:userId', (req, res) => {
   if (!req.files){
     return res.status(400).send('No files were uploaded.');
   } else {
+    console.log(idFile);
     let idFile = req.files.idFile.data;
     console.log(idFile);
 
