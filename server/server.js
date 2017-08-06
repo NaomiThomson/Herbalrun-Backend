@@ -110,7 +110,7 @@ app.post('/users', (req, res) => {
   })
 });
 
-app.patch('/users/upload/id/:userId', (req, res) => {
+app.post('/users/upload/id/:userId', (req, res) => {
   if (!req.files){
     return res.status(400).send('No files were uploaded.');
   } else {
