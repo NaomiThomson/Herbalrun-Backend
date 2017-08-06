@@ -130,13 +130,13 @@ app.post('/users/upload/id/:userId', (req, res) => {
 
 app.get('/users/files/id', authenticate, (req, res) => {
   User.findOne({_id: req.user._id}).then((user) => {
-    console.log(user.idFile);
+    console.log('the file!', user.idFile);
     var decodedImage = new Buffer(user.idFile, 'base64');
-    fs.writeFile(__dirname + `userId_user=${req.user._id}`, decodedImage, function (err) {
+    fs.writeFile(__dirname + '/image_decoded.jpg', decodedImage, function(err) {
       if (err) {
         return res.status(500).send(err);
       } else {
-        res.sendFile(__dirname + `userId_user=${req.user._id}`)
+        res.sendFile(__dirname + '/image_decoded.jpg');
       }
     })
   }).catch((e) => {
