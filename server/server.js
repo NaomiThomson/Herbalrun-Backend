@@ -110,6 +110,8 @@ app.post('/users', (req, res) => {
   })
 });
 
+//---------------------------------Upload stuff------------------------------
+
 app.post('/users/upload/id/:userId', (req, res) => {
   if (!req.files){
     return res.status(400).send('No files were uploaded.');
@@ -128,9 +130,26 @@ app.post('/users/upload/id/:userId', (req, res) => {
   }
 });
 
+app.post('/users/upload/rec/:userId', (req, res) => {
+  if (!req.files){
+    return res.status(400).send('No files were uploaded.');
+  } else {
+    console.log('---------')
+    console.log(req.files.file);
+    let idFile = req.files.file.data;
+    console.log(idFile);
+
+    User.findOneAndUpdate({_id: req.params.userId}, {$set: {recFile}}, {new: true})
+      .then((user) => {
+        res.send({user});
+      }).catch((e) => {
+        res.status(400).send();
+      })
+  }
+});
+
 app.get('/users/files/id', authenticate, (req, res) => {
   User.findOne({_id: req.user._id}).then((user) => {
-    console.log('the file!', user.idFile);
     var decodedImage = new Buffer(user.idFile, 'base64');
     fs.writeFile(__dirname + `userId_user=${req.user._id}.jpg`, decodedImage, function (err) {
       if (err) {
@@ -143,6 +162,23 @@ app.get('/users/files/id', authenticate, (req, res) => {
     console.log(e);
   })
 });
+
+app.get('/users/files/rec', authenticate, (req, res) => {
+  User.findOne({_id: req.user._id}).then((user) => {
+    var decodedImage = new Buffer(user.idFile, 'base64');
+    fs.writeFile(__dirname + `userRec_user=${req.user._id}.jpg`, decodedImage, function (err) {
+      if (err) {
+        return res.status(500).send(err);
+      } else {
+        res.sendFile(__dirname + `userRec_user=${req.user._id}.jpg`)
+      }
+    })
+  }).catch((e) => {
+    console.log(e);
+  })
+});
+
+//---------------------------------Upload stuff------------------------------
 
 app.patch('/users/:id', authenticate, (req, res) => {
   //edit user info
