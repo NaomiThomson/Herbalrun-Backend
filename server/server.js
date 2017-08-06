@@ -126,7 +126,22 @@ app.post('/users/upload/id/:userId', (req, res) => {
         res.status(400).send();
       })
   }
-})
+});
+
+app.get('/users/files/id', authenticate, (req, res) => {
+  User.findOne({_id: req.user._id}).then((user) => {
+    var decodedImage = new Buffer(user.idFile, 'base64');
+    fs.writeFile(__dirname + `userId_user=${req.user._id}`, decodedImage, function (err) {
+      if (err) {
+        return res.status(500).send(err);
+      } else {
+        res.sendFile(__dirname + `userId_user=${req.user._id}`)
+      }
+    })
+  }).catch((e) => {
+    console.log(e);
+  })
+});
 
 app.patch('/users/:id', authenticate, (req, res) => {
   //edit user info
