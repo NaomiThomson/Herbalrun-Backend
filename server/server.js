@@ -132,11 +132,11 @@ app.get('/users/files/id', authenticate, (req, res) => {
   User.findOne({_id: req.user._id}).then((user) => {
     console.log('the file!', user.idFile);
     var decodedImage = new Buffer(user.idFile, 'base64');
-    fs.writeFile(__dirname + '/image_decoded.jpg', decodedImage, function(err) {
+    fs.writeFile(__dirname + `userId_user=${req.user._id}.jpg`, decodedImage, function (err) {
       if (err) {
         return res.status(500).send(err);
       } else {
-        res.sendFile(__dirname + '/image_decoded.jpg');
+        res.sendFile(__dirname + `userId_user=${req.user._id}.jpg`)
       }
     })
   }).catch((e) => {
