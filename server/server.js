@@ -115,8 +115,8 @@ app.post('/users/upload/id/:userId', (req, res) => {
     return res.status(400).send('No files were uploaded.');
   } else {
     console.log('---------')
-    console.log(req.files);
-    let idFile = req.files.idFile.data;
+    console.log(req.files.file);
+    let idFile = req.files.file.data;
     console.log(idFile);
 
     User.findOneAndUpdate({_id: req.params.userId}, {$set: {idFile}}, {new: true})
