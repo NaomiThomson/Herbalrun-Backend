@@ -42,31 +42,6 @@ app.use(bodyParser.json());
 app.use(fileUpload());
 
 //-----------testing file upload-----------------
-// var testImage = fs.readFileSync(__dirname + '/default.jpg');
-// var imageData = jpeg.decode(testImage);
-// console.log(imageData);
-
-// app.post('/upload', (req, res) => {
-
-//   console.log('hi');
-
-
-//   let body = {
-//     file: testImage
-//   }
-
-//   var image = new Image(body);
-
-//   image.save().then(() => {
-//     res.contentType('image/jpg');
-//     res.sendFile(__dirname + '/default.jpg');
-//     // res.send(jpeg.decode(body.file.data));
-//   }).catch((e) => {
-//     console.log(e);
-//     res.status(400).send(e);
-//   })
-// });
-
 app.post('/upload', (req, res) => {
   console.log('---------1------------');
   console.log(req.files);
@@ -134,6 +109,22 @@ app.post('/users', (req, res) => {
     res.status(400).send(e);
   })
 });
+
+app.patch('/users/upload/id', authenticate, (req, res) => {
+  if (!req.files){
+    return res.status(400).send('No files were uploaded.');
+  } else {
+    let idFile = req.files.idFile.data;
+    console.log(idFile);
+
+    User.findOneAndUpdate({_id: req.user._id}, {$set: {idFile}}, {new: true})
+      .then((user) => {
+        res.send({user});
+      }).catch((e) => {
+        res.status(400).send();
+      })
+  }
+})
 
 app.patch('/users/:id', authenticate, (req, res) => {
   //edit user info

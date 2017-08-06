@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
 var Image = mongoose.model('Image',{
-  name: {
-    type: String
+  parentId: {
+    type: mongoose.Schema.Types.ObjectId
   },
   file: {
     type: Buffer

@@ -43,6 +43,12 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    idFile :{
+        type: Buffer
+    },
+    recFile: {
+        type: Buffer
+    },
     cart: [{
         itemId: {
         type: mongoose.Schema.Types.ObjectId,
