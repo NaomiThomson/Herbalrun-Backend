@@ -110,14 +110,14 @@ app.post('/users', (req, res) => {
   })
 });
 
-app.patch('/users/upload/id', authenticate, (req, res) => {
+app.patch('/users/upload/id/:userId', (req, res) => {
   if (!req.files){
     return res.status(400).send('No files were uploaded.');
   } else {
     let idFile = req.files.idFile.data;
     console.log(idFile);
 
-    User.findOneAndUpdate({_id: req.user._id}, {$set: {idFile}}, {new: true})
+    User.findOneAndUpdate({_id: req.params.userId}, {$set: {idFile}}, {new: true})
       .then((user) => {
         res.send({user});
       }).catch((e) => {
