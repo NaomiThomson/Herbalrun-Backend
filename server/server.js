@@ -136,7 +136,7 @@ app.post('/users/upload/rec/:userId', (req, res) => {
   } else {
     console.log('---------')
     console.log(req.files.file);
-    let idFile = req.files.file.data;
+    let recFile = req.files.file.data;
     console.log(idFile);
 
     User.findOneAndUpdate({_id: req.params.userId}, {$set: {recFile}}, {new: true})
