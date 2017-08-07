@@ -142,14 +142,18 @@ app.post('/users/upload/rec/:userId', (req, res) => {
   }
 });
 
-app.get('/users/files/id', authenticate, (req, res) => {
-  User.findOne({_id: req.user._id}).then((user) => {
+app.get('/users/files/id/:id', authenticate, (req, res) => {
+  if (!req.user.admin) {
+    return res.status(401).send();
+  };
+
+  User.findOne({_id: req.params.id}).then((user) => {
     var decodedImage = new Buffer(user.idFile, 'base64');
-    fs.writeFile(__dirname + `userId_user=${req.user._id}.jpg`, decodedImage, function (err) {
+    fs.writeFile(__dirname + `userId_user=${req.params.id}.jpg`, decodedImage, function (err) {
       if (err) {
         return res.status(500).send(err);
       } else {
-        res.sendFile(__dirname + `userId_user=${req.user._id}.jpg`)
+        res.sendFile(__dirname + `userId_user=${req.params.id}.jpg`)
       }
     })
   }).catch((e) => {
@@ -157,14 +161,18 @@ app.get('/users/files/id', authenticate, (req, res) => {
   })
 });
 
-app.get('/users/files/rec', authenticate, (req, res) => {
-  User.findOne({_id: req.user._id}).then((user) => {
+app.get('/users/files/rec/:id', authenticate, (req, res) => {
+  if (!req.user.admin) {
+    return res.status(401).send();
+  };
+
+  User.findOne({_id: req.params.id}).then((user) => {
     var decodedImage = new Buffer(user.recFile, 'base64');
-    fs.writeFile(__dirname + `userRec_user=${req.user._id}.jpg`, decodedImage, function (err) {
+    fs.writeFile(__dirname + `userRec_user=${req.params.id}.jpg`, decodedImage, function (err) {
       if (err) {
         return res.status(500).send(err);
       } else {
-        res.sendFile(__dirname + `userRec_user=${req.user._id}.jpg`)
+        res.sendFile(__dirname + `userRec_user=${req.params.id}.jpg`)
       }
     })
   }).catch((e) => {
