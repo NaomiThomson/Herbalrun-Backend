@@ -178,9 +178,9 @@ app.post('/upload/item/:itemId', (req, res) => {
   if (!req.files){
     return res.status(400).send('No files were uploaded.');
   } else {
-    let file = req.files.file.data;
+    let imageFile = req.files.file.data;
 
-    Item.findOneAndUpdate({_id: req.params.itemId}, {$set: {file}}, {new: true})
+    Item.findOneAndUpdate({_id: req.params.itemId}, {$set: {imageFile}}, {new: true})
       .then((item) => {
         res.send({item});
       }).catch((e) => {
