@@ -142,11 +142,7 @@ app.post('/users/upload/rec/:userId', (req, res) => {
   }
 });
 
-app.get('/users/files/id/:id', authenticate, (req, res) => {
-  if (!req.user.admin) {
-    return res.status(401).send();
-  };
-
+app.get('/users/files/id/:id', (req, res) => {
   User.findOne({_id: req.params.id}).then((user) => {
     var decodedImage = new Buffer(user.idFile, 'base64');
     fs.writeFile(__dirname + `userId_user=${req.params.id}.jpg`, decodedImage, function (err) {
@@ -161,11 +157,7 @@ app.get('/users/files/id/:id', authenticate, (req, res) => {
   })
 });
 
-app.get('/users/files/rec/:id', authenticate, (req, res) => {
-  if (!req.user.admin) {
-    return res.status(401).send();
-  };
-
+app.get('/users/files/rec/:id', (req, res) => {
   User.findOne({_id: req.params.id}).then((user) => {
     var decodedImage = new Buffer(user.recFile, 'base64');
     fs.writeFile(__dirname + `userRec_user=${req.params.id}.jpg`, decodedImage, function (err) {
