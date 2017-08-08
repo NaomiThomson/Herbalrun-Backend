@@ -172,6 +172,38 @@ app.get('/users/files/rec/:id', (req, res) => {
   })
 });
 
+//---------------------------------Upload stuff (for imagesvv) (for users ^^)------------------------------
+
+app.post('/upload/item/:itemId', (req, res) => {
+  if (!req.files){
+    return res.status(400).send('No files were uploaded.');
+  } else {
+    let file = req.files.file.data;
+
+    Item.findOneAndUpdate({_id: req.params.itemId}, {$set: {file}}, {new: true})
+      .then((item) => {
+        res.send({item});
+      }).catch((e) => {
+        res.status(400).send();
+      })
+  }
+});
+
+app.get('/upload/item/:itemId', (req, res) => {
+  Item.findOne({_id: req.params.itemId}).then((user) => {
+    var decodedImage = new Buffer(user.imageFile, 'base64');
+    fs.writeFile(__dirname + `itemId=${req.params.itemId}.jpg`, decodedImage, function (err) {
+      if (err) {
+        return res.status(500).send(err);
+      } else {
+        res.sendFile(__dirname + `itemId=${req.params.itemId}.jpg`)
+      }
+    })
+  }).catch((e) => {
+    console.log(e);
+  })
+});
+
 //---------------------------------Upload stuff------------------------------
 
 app.patch('/users/:id', authenticate, (req, res) => {

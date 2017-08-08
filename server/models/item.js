@@ -96,6 +96,9 @@ var Item = mongoose.model('Item',{
     type: String,
     required: false
   },
+  imageFile :{
+    type: Buffer
+  },
   _creator: {
       type: mongoose.Schema.Types.ObjectId,
       required: true
